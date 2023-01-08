@@ -38,9 +38,9 @@ public class LogAspect {
         Object result = proceedingJoinPoint.proceed();
         threadPoolExecutor.execute(()->{
             try {
-                //通过反射获取方法上的注解
+                //通过反射获取方法上的签名
                 MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
-                //获取方法上的aop注解对象
+                //获取切入方法的对象,获取方法上的aop注解对象
                 LogService logService = methodSignature.getMethod().getAnnotation(LogService.class);
                 //拿到convert对象
                 Class<? extends LogConvert> clazz = logService.convert();
